@@ -1,0 +1,20 @@
+{
+  "transaction_details": {
+    "gross_amount": 12000
+  },
+  "credit_card": {
+    "secure": true
+  },
+  "item_details": {
+    "id": "1",
+    "price": 12000,
+    "quantity": 1,
+    "name": "Pulsa Telkomsel 10k"
+  },
+  "customer_details": {
+    "first_name": "ahmad",
+    "last_name": "faisal",
+    "email": "ahmadfaisal@gmail.com",
+    "phone": "085252525252"
+  }
+}
