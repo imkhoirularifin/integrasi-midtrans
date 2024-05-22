@@ -1,7 +1,10 @@
 import { Snap } from 'midtrans-client-typescript/dist/lib/snap';
-import { IParameter } from '../Interface/IParameter';
+import { IParameter } from '../Interface/dto/IParameter';
+import { IWebhookData } from '../Interface/dto/IWebhookData';
+import crypto from 'crypto';
+import { IMidtransService } from '../Interface/service/IMidtransService';
 
-export class MidtransService {
+export class MidtransService implements IMidtransService {
 	// Create Snap API instance
 	private serverKey = process.env.MIDTRANS_SERVER_KEY!;
 	private clientKey = process.env.MIDTRANS_CLIENT_KEY!;
@@ -29,6 +32,23 @@ export class MidtransService {
 			return response;
 		} catch (error) {
 			throw error;
+		}
+	}
+
+	public async verifySignatureKey(parameter: IWebhookData): Promise<boolean> {
+		const signatureKeyString = `${parameter.order_id}${parameter.status_code}${parameter.gross_amount}${this.serverKey}`;
+
+		// encode SHA512
+		const encodedSignatureKey = crypto
+			.createHash('sha512')
+			.update(signatureKeyString)
+			.digest('hex');
+
+		// compare signature key
+		if (encodedSignatureKey === parameter.signature_key) {
+			return true;
+		} else {
+			return false;
 		}
 	}
 }

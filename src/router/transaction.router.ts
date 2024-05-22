@@ -12,6 +12,10 @@ export class TransactionRouter {
 		const router = Router();
 
 		router.post('/transactions', this.transactionController.createTransaction);
+		router.post(
+			'/transactions/webhook',
+			this.transactionController.webhookHandler
+		);
 
 		return router;
 	}
