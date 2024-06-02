@@ -13,8 +13,8 @@ export class TransactionRouter {
 
 		router.post('/transactions', this.transactionController.createTransaction);
 		router.post(
-			'/transactions/webhook',
-			this.transactionController.webhookHandler
+			'/transactions/callback',
+			this.transactionController.callbackHandler
 		);
 
 		return router;

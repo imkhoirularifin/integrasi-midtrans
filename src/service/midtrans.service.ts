@@ -1,6 +1,6 @@
 import { Snap } from 'midtrans-client-typescript/dist/lib/snap';
 import { IParameter } from '../Interface/dto/IParameter';
-import { IWebhookData } from '../Interface/dto/IWebhookData';
+import { ICallbackData } from '../Interface/dto/ICallbackData';
 import crypto from 'crypto';
 import { IMidtransService } from '../Interface/service/IMidtransService';
 
@@ -35,7 +35,7 @@ export class MidtransService implements IMidtransService {
 		}
 	}
 
-	public async verifySignatureKey(parameter: IWebhookData): Promise<boolean> {
+	public async verifySignatureKey(parameter: ICallbackData): Promise<boolean> {
 		const signatureKeyString = `${parameter.order_id}${parameter.status_code}${parameter.gross_amount}${this.serverKey}`;
 
 		// encode SHA512

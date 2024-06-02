@@ -1,6 +1,6 @@
 import { ITransactionController } from '../Interface/controller/ITransactionController';
+import { ICallbackData } from '../Interface/dto/ICallbackData';
 import { IParameter } from '../Interface/dto/IParameter';
-import { IWebhookData } from '../Interface/dto/IWebhookData';
 import { MidtransService } from '../service/midtrans.service';
 import { Request, Response } from 'express';
 
@@ -10,7 +10,7 @@ export class TransactionController implements ITransactionController {
 	constructor() {
 		this.midtransService = new MidtransService();
 		this.createTransaction = this.createTransaction.bind(this); // Bind the method here
-		this.webhookHandler = this.webhookHandler.bind(this); // Bind the method here
+		this.callbackHandler = this.callbackHandler.bind(this); // Bind the method here
 	}
 
 	public async createTransaction(req: Request, res: Response): Promise<void> {
@@ -40,9 +40,9 @@ export class TransactionController implements ITransactionController {
 		}
 	}
 
-	public async webhookHandler(req: Request, res: Response): Promise<void> {
+	public async callbackHandler(req: Request, res: Response): Promise<void> {
 		// get parameter from request body
-		const parameter: IWebhookData = req.body;
+		const parameter: ICallbackData = req.body;
 
 		// verify signature key
 		const isSignatureKeyValid = await this.midtransService.verifySignatureKey(

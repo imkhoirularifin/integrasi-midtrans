@@ -1,4 +1,4 @@
-export interface IWebhookData {
+export interface ICallbackData {
 	status_code: string;
 	transaction_status: string;
 	signature_key: string;

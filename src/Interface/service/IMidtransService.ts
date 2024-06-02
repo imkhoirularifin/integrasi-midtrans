@@ -1,7 +1,7 @@
 import { IParameter } from '../dto/IParameter';
-import { IWebhookData } from '../dto/IWebhookData';
+import { ICallbackData } from '../dto/ICallbackData';
 
 export interface IMidtransService {
 	createTransaction(parameter: IParameter): Promise<any>;
-	verifySignatureKey(parameter: IWebhookData): Promise<boolean>;
+	verifySignatureKey(parameter: ICallbackData): Promise<boolean>;
 }
